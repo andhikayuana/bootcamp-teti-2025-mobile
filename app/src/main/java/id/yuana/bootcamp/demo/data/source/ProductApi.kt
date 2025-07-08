@@ -1,7 +1,7 @@
 package id.yuana.bootcamp.demo.data.source
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import id.yuana.bootcamp.demo.data.source.response.GetRandomResponse
+import id.yuana.bootcamp.demo.data.model.Product
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -9,13 +9,15 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.http.GET
 
-interface JokesBapack2Api {
+interface ProductApi {
 
-    @GET("v1/text/random")
-    suspend fun randomJoke(): GetRandomResponse
+    @GET("objects")
+    suspend fun getObjects(): List<Product>
+
+    //TODO: implement
 
     companion object {
-        const val BASE_URL = "https://jokes-bapack2-api.yuana.id/"
+        const val BASE_URL = "https://api.restful-api.dev/"
 
         fun createHttpClient(): OkHttpClient {
             return OkHttpClient.Builder()
@@ -28,7 +30,7 @@ interface JokesBapack2Api {
         fun create(
             baseUrl: String = BASE_URL,
             httpClient: OkHttpClient = createHttpClient()
-        ): JokesBapack2Api {
+        ): ProductApi {
             val retrofit = Retrofit.Builder()
                 .client(httpClient)
                 .addConverterFactory(
@@ -39,7 +41,13 @@ interface JokesBapack2Api {
                 .baseUrl(baseUrl)
                 .build()
 
-            return retrofit.create(JokesBapack2Api::class.java)
+            return retrofit.create(ProductApi::class.java)
         }
+    }
+}
+
+object Module {
+    val productApi: ProductApi by lazy {
+        ProductApi.create()
     }
 }

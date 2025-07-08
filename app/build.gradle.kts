@@ -53,6 +53,10 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
+    val nav_version = "2.9.1"
+    implementation("androidx.navigation:navigation-fragment:$nav_version")
+    implementation("androidx.navigation:navigation-ui:$nav_version")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
