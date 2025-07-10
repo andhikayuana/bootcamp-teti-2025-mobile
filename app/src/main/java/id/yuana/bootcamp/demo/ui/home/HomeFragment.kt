@@ -78,6 +78,7 @@ class HomeFragment : Fragment() {
         }
         binding.btnCreate.setOnClickListener {
             viewModel.onEvent(HomeEvent.OnCreateTodo)
+//            throw RuntimeException("This is crash test!")
         }
         viewModel.onEvent(HomeEvent.OnLoadTodos)
     }
